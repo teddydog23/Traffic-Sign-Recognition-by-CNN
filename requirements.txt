@@ -1,0 +1,7 @@
+python3
+tensorflow
+tkinter
+numpy
+pickle
+matplotlib
+random
