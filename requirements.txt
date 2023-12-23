@@ -1,7 +1,6 @@
-python3
 tensorflow
 tkinter
 numpy
 matplotlib
-pickle (available in Python3)
-random (available in Python3)
+pickle
+random
