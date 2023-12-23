@@ -1,9 +1,9 @@
 # Traffic-Sign-Recognition-by-CNN
 Capstone Project for Introduction to AI
 
-Step 1, install python3 (only 3.8 - 3.11 supporting Tensorflow on CPU) and all the modules, libraries required in requirements.txt
+Step 1, install python 3.11 and all the modules, libraries required in requirements.txt
 
-Step 2, download the “demo” folder (make sure that main.py, test.p and traffic_sign_classification.h5 are in the same folder).
+Step 2, download main.py, test.p, traffic_sign_classification.h5 (make sure that those files are in the same folder)
 Where main.py is graphical user interface, test.p is test datasets and traffic_sign_classification.h5 is the model.
 
-Finally, run main.py
+Step3, run main.py
