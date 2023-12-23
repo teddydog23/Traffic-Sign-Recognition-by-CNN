@@ -1,5 +1,4 @@
 # Traffic-Sign-Recognition-by-CNN
-Capstone Project for Introduction to AI
 
 Step 1, install python 3.11 and all the modules, libraries required in requirements.txt
 
