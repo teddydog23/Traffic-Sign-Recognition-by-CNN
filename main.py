@@ -16,10 +16,10 @@ model = load_model('traffic_sign_classification.h5')
 
 # Load images from test set
 with open("./test.p", mode="rb") as f:
-    test = pickle.load(f)
-testX = test["features"]
-testY = test["labels"]
-testX = testX.astype("float") / 255.0
+	test = pickle.load(f)
+features = test["features"]
+labels = test["labels"]
+features = features.astype("float") / 255.0
 
 
 # Define traffic signs class
@@ -80,53 +80,42 @@ figure = Figure(figsize=(7, 5), dpi = 100)
 
 # Functions
 def display_image(path_file, sign):
-    figure.clear()
-
-    im = Image.open(path_file)
-    image = figure.add_subplot(1, 1, 1)
-    image.imshow(im)
-    image.axis("off")
-    image.set_title("Predict result: " + sign)
-
-    canvas.draw_idle()
+	figure.clear()
+	im = Image.open(path_file)
+	image = figure.add_subplot(1, 1, 1)
+	image.imshow(im)
+	image.axis("off")
+	image.set_title("Predict result: " + sign)
+	canvas.draw_idle()
 
 
 def random_images():
-    figure.clear()
-    for i in range(9):
-        #prediction
-        rand = random.randint(1, 10000)
-        result = model.predict([testX[rand : rand+1]])
-        result = np.argmax(result)
-
-        color = "red"
-        if result == testY[rand]:
-           color = "green"
-
-
-        image = figure.add_subplot(3, 3, i+1)
-        image.imshow(testX[rand])
-        image.axis("off")
-        image.set_title(classes[result+1], color = color)
-    canvas.draw_idle()
+	figure.clear()
+	for i in range(9):
+		rand = random.randint(1, 10000)
+		result = model.predict([features[rand : rand+1]])
+		result = np.argmax(result)
+		
+		color = "red"
+		if result == labels[rand]:
+			color = "green"
+			image = figure.add_subplot(3, 3, i+1)
+			image.imshow(features[rand])
+			image.axis("off")
+			image.set_title(classes[result+1], color = color)
+		canvas.draw_idle()
 
 
 def predict_an_image(path_file):
-    #preprocesing images
-    img = Image.open(path_file)
-    img = img.resize((32, 32))
-    img = np.expand_dims(img, axis = 0)
-    img = np.array(img)
-    img = img / 255.0
-
-    #prediction
-    result = model.predict([img])
-    result = np.argmax(result)
-    sign = classes[result+1]
-    
-    display_image(path_file, sign)
-
-
+	img = Image.open(path_file)
+	img = img.resize((32, 32))
+	img = np.expand_dims(img, axis = 0)
+	img = np.array(img)
+	img = img / 255.0
+	result = model.predict([img])
+	result = np.argmax(result)
+	sign = classes[result+1]
+	display_image(path_file, sign)
 
 
 def upload_image():
