@@ -21,7 +21,6 @@ features = test["features"]
 labels = test["labels"]
 features = features.astype("float") / 255.0
 
-
 # Define traffic signs class
 classes = { 1:'Speed limit (20km/h)',
             2:'Speed limit (30km/h)', 
@@ -67,16 +66,13 @@ classes = { 1:'Speed limit (20km/h)',
             42:'End of no passing', 
             43:'End no passing veh > 3.5 tons' }
 
-
 # Init main
 window = tk.Tk()
 window.geometry('800x600')
 window.title('Traffic sign classification')
 
-
 matplotlib.use("TkAgg")
 figure = Figure(figsize=(7, 5), dpi = 100)
-
 
 # Functions
 def display_image(path_file, sign):
@@ -95,23 +91,25 @@ def random_images():
 		rand = random.randint(1, 10000)
 		result = model.predict([features[rand : rand+1]])
 		result = np.argmax(result)
-		
 		color = "red"
 		if result == labels[rand]:
 			color = "green"
-			image = figure.add_subplot(3, 3, i+1)
-			image.imshow(features[rand])
-			image.axis("off")
-			image.set_title(classes[result+1], color = color)
-		canvas.draw_idle()
+		image = figure.add_subplot(3, 3, i+1)
+		image.imshow(features[rand])
+		image.axis("off")
+		image.set_title(classes[result+1], color = color)
+	canvas.draw_idle()
 
 
 def predict_an_image(path_file):
+	# Preprocessing
 	img = Image.open(path_file)
 	img = img.resize((32, 32))
 	img = np.expand_dims(img, axis = 0)
 	img = np.array(img)
 	img = img / 255.0
+
+	# Prediction
 	result = model.predict([img])
 	result = np.argmax(result)
 	sign = classes[result+1]
@@ -125,17 +123,16 @@ def upload_image():
 		uploaded.thumbnail(((window.winfo_width()/2.25),(window.winfo_height()/2.25)))
 		im = ImageTk.PhotoImage(uploaded)
 		predict_an_image(path_file)
-
 	except:
 		pass
-    
 
 
+# Create an area for displaying images
 canvas = FigureCanvasTkAgg(figure, window)
 canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
     
 
-# Button "Upload an image" and "Upload an image"
+# Button "Upload an image" and "Random Images"
 upload = Button(window, text = "Upload an image", command = upload_image)
 upload.pack()
 
