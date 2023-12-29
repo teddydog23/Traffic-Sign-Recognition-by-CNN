@@ -1,12 +1,12 @@
-import tkinter as tk
-from tkinter import filedialog
-from tkinter import*
-from PIL import ImageTk, Image
+import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import numpy as np
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import*
+from PIL import ImageTk, Image
 import pickle
 import random
 
@@ -85,22 +85,6 @@ def display_image(path_file, sign):
 	canvas.draw_idle()
 
 
-def random_images():
-	figure.clear()
-	for i in range(9):
-		rand = random.randint(1, 10000)
-		result = model.predict([features[rand : rand+1]])
-		result = np.argmax(result)
-		color = "red"
-		if result == labels[rand]:
-			color = "green"
-		image = figure.add_subplot(3, 3, i+1)
-		image.imshow(features[rand])
-		image.axis("off")
-		image.set_title(classes[result+1], color = color)
-	canvas.draw_idle()
-
-
 def predict_an_image(path_file):
 	# Preprocessing
 	img = Image.open(path_file)
@@ -125,6 +109,22 @@ def upload_image():
 		predict_an_image(path_file)
 	except:
 		pass
+
+
+def random_images():
+	figure.clear()
+	for i in range(9):
+		rand = random.randint(1, 10000)
+		result = model.predict([features[rand : rand+1]])
+		result = np.argmax(result)
+		color = "red"
+		if result == labels[rand]:
+			color = "green"
+		image = figure.add_subplot(3, 3, i+1)
+		image.imshow(features[rand])
+		image.axis("off")
+		image.set_title(classes[result+1], color = color)
+	canvas.draw_idle()
 
 
 # Create an area for displaying images
