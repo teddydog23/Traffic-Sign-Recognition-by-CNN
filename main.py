@@ -1,14 +1,14 @@
 import tkinter as tk
 from tkinter import filedialog
-import numpy as np
 from tkinter import*
 from PIL import ImageTk, Image
-import pickle
 import matplotlib
 import matplotlib.pyplot as plt
-import random
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import numpy as np
+import pickle
+import random
 
 # Load pre-trained model
 from tensorflow.keras.models import load_model
