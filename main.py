@@ -14,7 +14,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tensorflow.keras.models import load_model
 model = load_model('traffic_sign_classification.h5')
 
-#load image from testset
+#load images from test dataset
 with open("./test.p", mode="rb") as f:
     test = pickle.load(f)
 testX = test["features"]
