@@ -10,11 +10,11 @@ import random
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-#load model
+# Load pre-trained model
 from tensorflow.keras.models import load_model
 model = load_model('traffic_sign_classification.h5')
 
-#load images from test dataset
+# Load images from test set
 with open("./test.p", mode="rb") as f:
     test = pickle.load(f)
 testX = test["features"]
@@ -22,7 +22,7 @@ testY = test["labels"]
 testX = testX.astype("float") / 255.0
 
 
-#define traffic signs class
+# Define traffic signs class
 classes = { 1:'Speed limit (20km/h)',
             2:'Speed limit (30km/h)', 
             3:'Speed limit (50km/h)', 
@@ -68,7 +68,7 @@ classes = { 1:'Speed limit (20km/h)',
             43:'End no passing veh > 3.5 tons' }
 
 
-#init main
+# Init main
 window = tk.Tk()
 window.geometry('800x600')
 window.title('Traffic sign classification')
@@ -78,7 +78,7 @@ matplotlib.use("TkAgg")
 figure = Figure(figsize=(7, 5), dpi = 100)
 
 
-#functions
+# Functions
 def display_image(path_file, sign):
     figure.clear()
 
@@ -146,7 +146,7 @@ canvas = FigureCanvasTkAgg(figure, window)
 canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
     
 
-#buttons
+# Button "Upload an image" and "Upload an image"
 upload = Button(window, text = "Upload an image", command = upload_image)
 upload.pack()
 
